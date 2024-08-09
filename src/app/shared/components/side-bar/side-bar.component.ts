@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NgClass, NgFor } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [NgClass, NgFor],
+  imports: [NgClass, NgFor, RouterModule],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
@@ -15,12 +16,14 @@ export class SideBarComponent {
 
   customOptions: Array<any> = []
 
+  constructor(private router:Router) {}
+
   ngOnInit(): void {
     this.mainMenu.defaultOptions = [
       {
         name: 'Home',
         icon: 'uil uil-estate',
-        router: ['/', 'auth']
+        router: ['/']
       },
       {
         name: 'Buscar',
@@ -67,6 +70,16 @@ export class SideBarComponent {
 
   }
 
+  goTo($event: any): void {
+    this.router.navigate(['/', 'favorites'],{
+      queryParams:{
+        kv1: 'value1',
+        kv2: 'value2',
+        kv3: 'value3',
+      }
+    });
+    console.log($event)
+  }
 }
 
 
