@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '@modules/auth/services/auth.service';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class AuthPageComponent implements OnInit {
 
   formLogin: FormGroup = new FormGroup({});
+
+  constructor(private asAuthService: AuthService){}
 
   ngOnInit():void{
     this.formLogin = new FormGroup(
@@ -31,6 +34,7 @@ export class AuthPageComponent implements OnInit {
     );
   }
   sendLogin(): void {
-    const body = this.formLogin.value;
+    const {email, password} = this.formLogin.value;
+    this.asAuthService.sendCredentials(email, password);
   }
 }
