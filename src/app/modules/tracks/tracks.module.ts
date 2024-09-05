@@ -10,7 +10,7 @@ import { SectionGenericComponent } from '@shared/components/section-generic/sect
   imports: [
     CommonModule,
     TracksRoutingModule,
-    SectionGenericComponent
+    SectionGenericComponent,
   ]
 })
 export class TracksModule { }
