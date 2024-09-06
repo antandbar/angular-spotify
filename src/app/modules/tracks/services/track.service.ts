@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
-import { map, mergeMap, Observable, tap } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { enviorement } from 'src/enviorements/enviorement';
 
 
@@ -37,7 +37,12 @@ export class TrackService {
         /* map((response: any) => {
           return response.data.slice().filter((track:TrackModel) => track._id !== 1);
         }) */
-        tap(data => console.log('ok ok ok', data))
+        /* tap(data => console.log('ok ok ok', data)) */
+        catchError((err) => {
+          const { status, statusText } = err;
+          console.log('Algo paso revisame ' + [status, statusText])
+          return of([]);
+        })
       )
   }
 }
