@@ -38,6 +38,10 @@ export class AuthPageComponent implements OnInit {
     const {email, password} = this.formLogin.value;
     this.asAuthService.sendCredentials(email, password)
     .subscribe(responseOk => {
+/*       {
+        "email":"test@test.com",
+        "password":"12345678" 
+    } */
       console.log("Session iniciada correcta");
       const { tokenSession, data } = responseOk;
       this.cookie.set('token', tokenSession, 4, '/');
